@@ -2,7 +2,7 @@
 Integration with Slack webhooks
 
 # DESCRIPTION
-This module is designed for *Request Tracker 4* integrating with *Slack* webhooks. It was modified from Maciek's original code which was posted on RT's mailing list. His original code is [found here](http://www.gossamer-threads.com/lists/rt/users/128413#128413)
+This module is a modified version of Anhdrew's original RT4 intergration with Slack. Since we are already at RT5 version, we need to remove several contraints so that we can install this plugin and use it as well.
 
 The module works with the *Mattermost* server as well.
 
@@ -71,6 +71,7 @@ RT::Extension::Slack::Notify(text => $text, channel => "support-team", username 
 # AUTHORS
 [Maciek] (http://www.gossamer-threads.com/lists/rt/users/128413#128413)  
 Andrew Wippler 
+Michal Cech
     
 
 # LICENSE AND COPYRIGHT
