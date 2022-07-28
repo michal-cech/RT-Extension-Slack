@@ -100,8 +100,20 @@ sub Notify {
 		icon_emoji => ':ghost:', 
 		text => 'I have forgotten to say something', 
 	}; 
-	my $service_webhook; 
+	
+        my $service = $args{'service'} || undef;
+        if (not defined $service) {
+            $RT::Logger->error("No service defined!");
+            return;
+        }
+	
+        my %services = RT->Config->Get('SlackWebhookURL');
+        my $service_webhook = $services{$service};
 
+        if (!$service_webhook) { 
+            $RT::Logger->error("Unknown service!");
+            return; 
+        } 
 
 	foreach (keys %args) { 
 		$payload->{$_} = $args{$_}; 
@@ -110,11 +122,6 @@ sub Notify {
 		return; 
 	} 
 	my $payload_json = JSON::encode_json($payload); 
-
-	$service_webhook = RT->Config->Get('SlackWebhookURL'); 
-	if (!$service_webhook) { 
-		return; 
-	} 
 
 	my $ua = LWP::UserAgent->new(); 
 	$ua->timeout(10); 
